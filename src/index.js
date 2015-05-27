@@ -40,14 +40,14 @@ var BankService = function (provider) {
     return _provider.createCreditCard(token);
   };
   /**
-   * Verifies that the user has access to the bank account
+   * Verifies that the user has access to the bank account using micro-deposits
    *
    * Required before a bank account can be charged.
    * @function verifyBankAccount
    * @memberof BankService
    * @instance
    * @param {record} bankAccount the record of the bank account to be verified
-   * @param {array} amounts the micro-deposit verification amounts
+   * @param {Array} amounts the micro-deposit verification amounts
    * @returns {promise}
    */
   this.verifyBankAccount = function (bankAccount, amounts) {
