@@ -1,0 +1,21 @@
+language: node_js
+before_install:
+  - npm install -g gulp mocha
+  - npm install
+  - npm test
+install:
+  - 'git config --global user.email "travis-ci@entercastle.com"'
+  - 'git config --global user.name "Travis Castle"'
+script:
+  - gulp docs
+  - cd docs
+  - git init
+  - 'git remote add origin "https://${GH_TOKEN}@github.com/castle-dev/le-bank-service.git"'
+  - git checkout -B gh-pages
+  - git add .
+  - 'git commit -m "Updating documentation"'
+  - 'git push origin gh-pages -fq > /dev/null'
+env:
+  global:
+    - ENVIRONMENT=staging
+    - secure: CEMKPcQzKOZ9aEfJ9wn1jh+mo1VTfHnBEmvAiKJMSliX19uilfIpMGhkphfzeIK1kXM0ewdklvZzznWAq1L/QIYNwqoeveQqmgKKR5KTlMtFNKGzcn5qFAH9VzmfMtKWvUooXFYPVOIhvQxo8n0/TcL4hcnQK2sB8udYmHhrFs80t5YZ/1bue1+uwJuADWRIDqg/i0k5liJzipZ8cK8c8yiTT3lIST1nFihM4CorhAweDpHWDTTPyTMvLrXrv8xysdRcdX0UaTdaSi/eLxn2Xdufhr9E6k1DUc6cJY3UfEMm63muXwOUp8JxNW0R+O97jmmeq4GdNF/NAnwj3p1bKjN3T/uxn3tkLK4v0rC9NfrKXn5RtvCkNx5URQ9ktqgsi70Rq+hiDUL/T5BHcU/mm9roFpkJ4D7oD+Fn1qy6AtfK/5w3wUZQgVME1/TzLAZ8EAJIll/EiCdZKMn0t8ftCvzG7wNYA0TLzoLkAz1UDkcnYM0sewY6MfTM3LiPIgyS3NKmj+6i0fpuY0KJc+VMdzXC+4rqbkOwwiE/qI9GP1UvOrBfDJrm/nqtRUYrQdH5xL8pKdUzXdn8sGU8fnWMMDhdDPgj239wMpqmxon87R+0JUJvP7FfRY4VPq6n+ztOmahB+DFUTqqm4cVc2GdkXnDzth8P9vYM8d5iKBKRlVo=
