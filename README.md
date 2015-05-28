@@ -10,7 +10,14 @@ le-bank-service
 ## Usage
 
 ```
-  //TODO
+  var provider = /* initialize bank provider */
+  var BankService = require('le-bank-service');
+  var bank = new BankService(provider);
+
+  bank.createCreditCard('tok_ABC123') // tokenized credit card info
+  .then(function (record) {
+    ...
+  });
 ```
 
 ## Tests
