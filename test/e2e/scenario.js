@@ -1,4 +1,5 @@
 var q = require('q');
+var Firebase = require('firebase');
 var BankService = require('../../src/index.js');
 var BankProvider = require('le-bank-provider-stripe');
 var StorageService = require('le-storage-service');
@@ -12,7 +13,8 @@ var expect = chai.expect;
 chai.use(sinonChai);
 chai.use(chaiAsPromised);
 
-var storage = new StorageService(new StorageProvider(process.env.FIREBASE_URL));
+var firebaseRef = new Firebase(process.env.FIREBASE_URL);
+var storage = new StorageService(new StorageProvider(firebaseRef));
 var provider = new BankProvider(process.env.STRIPE_SECRET_KEY, storage);
 var bank = new BankService(provider);
 
