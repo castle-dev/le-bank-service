@@ -54,6 +54,20 @@ var BankService = function (provider) {
     return _provider.verifyBankAccount(bankAccount, amounts);
   };
   /**
+   * Verifies that the user is who they say they are
+   *
+   * Required before a bank account can accept payments.
+   * @function verifyIdentity
+   * @memberof BankService
+   * @instance
+   * @param {record} bankAccount the record of the bank account to be verified
+   * @param {Object} identity the map of identity fields
+   * @returns {promise}
+   */
+  this.verifyIdentity = function (bankAccount, identity) {
+    return _provider.verifyIdentity(bankAccount, identity);
+  };
+  /**
    * Charges a bank account
    * @function chargeBankAccount
    * @memberof BankService
