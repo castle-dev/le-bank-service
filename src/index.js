@@ -62,10 +62,11 @@ var BankService = function (provider) {
    * @instance
    * @param {record} bankAccount the record of the bank account to be verified
    * @param {Object} identity the map of identity fields
+   * @param {string} filepath (optional) path to uploaded image of government ID
    * @returns {promise}
    */
-  this.verifyIdentity = function (bankAccount, identity) {
-    return _provider.verifyIdentity(bankAccount, identity);
+  this.verifyIdentity = function (bankAccount, identity, filepath) {
+    return _provider.verifyIdentity(bankAccount, identity, filepath);
   };
   /**
    * Charges a bank account
