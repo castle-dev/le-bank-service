@@ -34,7 +34,7 @@
     "gulp-rename": "^1.2.2",
     "gulp-tag-version": "^1.2.1",
     "gulp-util": "^3.0.4",
-    "le-bank-provider-stripe": "*",
+    "le-bank-provider-stripe": "^0.4.0",
     "le-storage-provider-firebase": "^2.0.3",
     "le-storage-service": "^2.2.1",
     "mocha": "^2.2.4",
