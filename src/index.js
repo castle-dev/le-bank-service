@@ -69,6 +69,17 @@ var BankService = function (provider) {
     return _provider.verifyIdentity(bankAccount, identity, filepath);
   };
   /**
+   * Checks that the verification process was successful
+   * @function isIdentityVerified
+   * @memberof BankService
+   * @instance
+   * @param {record} bankAccount the record of the bank account to be verified
+   * @returns {promise}
+   */
+  this.isIdentityVerified = function (bankAccount) {
+    return _provider.isIdentityVerified(bankAccount);
+  };
+  /**
    * Charges a bank account
    * @function chargeBankAccount
    * @memberof BankService

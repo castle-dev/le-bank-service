@@ -166,6 +166,26 @@ describe('BankService', function () {
     var promise = bank.verifyBankAccount(bankAccount, amounts);
     return expect(promise).to.eventually.be.fulfilled;
   });
+  it('should know when identities are unverified', function () {
+    var promise = bank.isIdentityVerified(bankAccount);
+    return expect(promise).to.eventually.be.rejectedWith('Identity unverified, reason unknown');
+  });
+  it('should verify identities', function () {
+    var identity = {};
+    identity.legal_entity = {};
+    identity.legal_entity.first_name = 'Bruce';
+    identity.legal_entity.last_name = 'Wayne';
+    identity.legal_entity.dob = {};
+    identity.legal_entity.dob.day = '1';
+    identity.legal_entity.dob.month = '1';
+    identity.legal_entity.dob.year = '1984';
+    identity.legal_entity.type = 'individual';
+    identity.tos_acceptance = {};
+    identity.tos_acceptance.ip = '192.168.0.1';
+    identity.tos_acceptance.date = new Date().getTime();
+    var promise = bank.verifyIdentity(bankAccount, identity);
+    return expect(promise).to.eventually.be.fulfilled;
+  });
   it('should charge bank accounts', function () {
     var promise = bank.chargeBankAccount(bankAccount, 500) // cents
     .then(function (payment) { bankAccountPayment = payment; },
