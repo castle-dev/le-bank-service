@@ -5,8 +5,10 @@ var q = require('q');
  * @param {BankProvider} provider the bank provider which this service delegates to
  * @returns {service}
  */
-var BankService = function (provider) {
-  if (!provider) { throw new Error('Provider required'); }
+var BankService = function(provider) {
+  if (!provider) {
+    throw new Error('Provider required');
+  }
   var _provider = provider;
   /**
    * Creates a bank account
@@ -20,13 +22,20 @@ var BankService = function (provider) {
    * @param {string} countryCode the two letter country code of the bank's origin
    * @param {string} creditToken the tokenized bank account info
    * @param {string} debitToken the tokenized bank account info
+   * @param {string} email the email to assocaite with the stripe customer
    * @returns {promise} resolves with the newly created bankAccount record
    */
-  this.createBankAccount = function (countryCode, creditToken, debitToken) {
-    if (!countryCode) { return q.reject(new Error('Country code required')); }
-    if (!creditToken) { return q.reject(new Error('Credit token required')); }
-    if (!debitToken) { return q.reject(new Error('Debit token required')); }
-    return _provider.createBankAccount(countryCode, creditToken, debitToken);
+  this.createBankAccount = function(countryCode, creditToken, debitToken, email) {
+    if (!countryCode) {
+      return q.reject(new Error('Country code required'));
+    }
+    if (!creditToken) {
+      return q.reject(new Error('Credit token required'));
+    }
+    if (!debitToken) {
+      return q.reject(new Error('Debit token required'));
+    }
+    return _provider.createBankAccount(countryCode, creditToken, debitToken, email);
   };
   /**
    * Creates a credit card
@@ -34,10 +43,11 @@ var BankService = function (provider) {
    * @memberof BankService
    * @instance
    * @param {string} token the tokenized credit card info
+   * @param {string} email the email to assocaite with the stripe customer
    * @returns {promise} resolves with the newly created creditCard record
    */
-  this.createCreditCard = function (token) {
-    return _provider.createCreditCard(token);
+  this.createCreditCard = function(token, email) {
+    return _provider.createCreditCard(token, email);
   };
   /**
    * Verifies that the user has access to the bank account using micro-deposits
@@ -50,7 +60,7 @@ var BankService = function (provider) {
    * @param {Array} amounts the micro-deposit verification amounts
    * @returns {promise}
    */
-  this.verifyBankAccount = function (bankAccount, amounts) {
+  this.verifyBankAccount = function(bankAccount, amounts) {
     return _provider.verifyBankAccount(bankAccount, amounts);
   };
   /**
@@ -65,7 +75,7 @@ var BankService = function (provider) {
    * @param {string} filepath (optional) path to uploaded image of government ID
    * @returns {promise}
    */
-  this.verifyIdentity = function (bankAccount, identity, filepath) {
+  this.verifyIdentity = function(bankAccount, identity, filepath) {
     return _provider.verifyIdentity(bankAccount, identity, filepath);
   };
   /**
@@ -76,7 +86,7 @@ var BankService = function (provider) {
    * @param {record} bankAccount the record of the bank account to be verified
    * @returns {promise}
    */
-  this.isIdentityVerified = function (bankAccount) {
+  this.isIdentityVerified = function(bankAccount) {
     return _provider.isIdentityVerified(bankAccount);
   };
   /**
@@ -88,9 +98,13 @@ var BankService = function (provider) {
    * @param {number} cents the numbers of cents to charge
    * @returns {promise} resolves with the newly created payment record
    */
-  this.chargeBankAccount = function (bankAccount, cents) {
-    if (!bankAccount) { return q.reject(new Error('Credit card required')); }
-    if (!cents) { return q.reject(new Error('Cents required')); }
+  this.chargeBankAccount = function(bankAccount, cents) {
+    if (!bankAccount) {
+      return q.reject(new Error('Credit card required'));
+    }
+    if (!cents) {
+      return q.reject(new Error('Cents required'));
+    }
     return _provider.chargeBankAccount(bankAccount, cents);
   };
   /**
@@ -102,9 +116,13 @@ var BankService = function (provider) {
    * @param {number} cents the numbers of cents to charge
    * @returns {promise} resolves with the newly created payment record
    */
-  this.chargeCreditCard = function (card, cents) {
-    if (!card) { return q.reject(new Error('Credit card required')); }
-    if (!cents) { return q.reject(new Error('Cents required')); }
+  this.chargeCreditCard = function(card, cents) {
+    if (!card) {
+      return q.reject(new Error('Credit card required'));
+    }
+    if (!cents) {
+      return q.reject(new Error('Cents required'));
+    }
     return _provider.chargeCreditCard(card, cents);
   };
   /**
@@ -117,9 +135,13 @@ var BankService = function (provider) {
    * @param {number} cents the number of cents to transfer
    * @returns {promise} resolves with the newly created payment record
    */
-  this.transfer = function (source, destination, cents) {
-    if (!source) { return q.reject(new Error('Source required')); }
-    if (!cents) { return q.reject(new Error('Destination required')); }
+  this.transfer = function(source, destination, cents) {
+    if (!source) {
+      return q.reject(new Error('Source required'));
+    }
+    if (!cents) {
+      return q.reject(new Error('Destination required'));
+    }
     return _provider.transfer(source, destination, cents);
   };
   /**
@@ -130,7 +152,7 @@ var BankService = function (provider) {
    * @param {string} id the id of the bank account record
    * @returns {record}
    */
-  this.getBankAccount = function (id) {
+  this.getBankAccount = function(id) {
     return _provider.getBankAccount(id);
   };
   /**
@@ -141,7 +163,7 @@ var BankService = function (provider) {
    * @param {string} id the id of the credit card record
    * @returns {record}
    */
-  this.getCreditCard = function (id) {
+  this.getCreditCard = function(id) {
     return _provider.getCreditCard(id);
   };
 };
