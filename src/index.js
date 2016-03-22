@@ -135,9 +135,10 @@ var BankService = function(provider) {
    * @param {record} source the record of the credit card or bank account to be charged
    * @param {record} destination the record of the bank account to be credited
    * @param {number} cents the number of cents to transfer
+   * @param {string} description intended for end users to read, such as in a bank statement
    * @returns {promise} resolves with the newly created payment record
    */
-  this.transfer = function(source, destination, cents) {
+  this.transfer = function(source, destination, cents, description) {
     cents = Math.round(cents);
     if (!source) {
       return q.reject(new Error('Source required'));
@@ -145,7 +146,7 @@ var BankService = function(provider) {
     if (!cents) {
       return q.reject(new Error('Destination required'));
     }
-    return _provider.transfer(source, destination, cents);
+    return _provider.transfer(source, destination, cents, description);
   };
   /**
    * Returns a bank account record, given the id
