@@ -72,7 +72,13 @@ describe('BankService', function () {
     return expect(promise).to.eventually.be.fulfilled;
   });
   it('should transfer from credit cards', function () {
-    var promise = service.transfer(creditCard, bankAccount, 123);
+    mockProvider.transfer = function(source, destination, cents) {
+      expect(source).to.equal(creditCard);
+      expect(destination).to.equal(destination);
+      expect(cents).to.equal(123);
+      return q.resolve();
+    }
+    var promise = service.transfer(creditCard, bankAccount, 123.4822);
     return expect(promise).to.eventually.be.fulfilled;
   });
 });

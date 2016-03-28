@@ -99,6 +99,7 @@ var BankService = function(provider) {
    * @returns {promise} resolves with the newly created payment record
    */
   this.chargeBankAccount = function(bankAccount, cents) {
+    cents = Math.round(cents);
     if (!bankAccount) {
       return q.reject(new Error('Credit card required'));
     }
@@ -117,6 +118,7 @@ var BankService = function(provider) {
    * @returns {promise} resolves with the newly created payment record
    */
   this.chargeCreditCard = function(card, cents) {
+    cents = Math.round(cents);
     if (!card) {
       return q.reject(new Error('Credit card required'));
     }
@@ -136,6 +138,7 @@ var BankService = function(provider) {
    * @returns {promise} resolves with the newly created payment record
    */
   this.transfer = function(source, destination, cents) {
+    cents = Math.round(cents);
     if (!source) {
       return q.reject(new Error('Source required'));
     }
