@@ -1,6 +1,6 @@
 {
   "name": "le-bank-service",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A simple interface for transfering money between credit cards and bank accounts",
   "main": "src/index.js",
   "scripts": {
