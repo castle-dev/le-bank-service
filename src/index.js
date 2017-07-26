@@ -23,9 +23,10 @@ var BankService = function(provider) {
    * @param {string} creditToken the tokenized bank account info
    * @param {string} debitToken the tokenized bank account info
    * @param {string} email the email to assocaite with the stripe customer
+   * @param {string} id (optional) the ID to use for the new bank account
    * @returns {promise} resolves with the newly created bankAccount record
    */
-  this.createBankAccount = function(countryCode, creditToken, debitToken, email) {
+  this.createBankAccount = function(countryCode, creditToken, debitToken, email, bankAccountID) {
     if (!countryCode) {
       return q.reject(new Error('Country code required'));
     }
@@ -35,7 +36,7 @@ var BankService = function(provider) {
     if (!debitToken) {
       return q.reject(new Error('Debit token required'));
     }
-    return _provider.createBankAccount(countryCode, creditToken, debitToken, email);
+    return _provider.createBankAccount(countryCode, creditToken, debitToken, email, bankAccountID);
   };
   /**
    * Creates a credit card
